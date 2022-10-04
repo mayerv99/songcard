@@ -30,7 +30,7 @@ const LanguagePage = (props) => {
             onPress={() => handleSelectLanguage(language)}
           >
             <Text>{language.label}</Text>
-            <Text>></Text>
+            <Text>&#8594;</Text>
           </LanguageItem>
         ))}
       </Wrapper>
