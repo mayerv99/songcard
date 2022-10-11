@@ -11,6 +11,8 @@ import CustomButton from "../../Components/CustomButton";
 import { ButtonsDiv } from "./styled";
 
 const InitialPage = (props) => {
+  const handleGoogleLogin = () => {};
+
   return (
     <SafeAreaView>
       <View style={{ alignItems: "center" }}>
@@ -23,13 +25,14 @@ const InitialPage = (props) => {
 
       <ButtonsDiv>
         <CustomButton
-          title="Começar"
-          onPress={() => props.navigation.navigate("languagePage")}
+          title="Entrar"
+          // onPress={() => props.navigation.navigate("loginPage")}
+          onPress={() => {}}
         />
         <CustomButton
-          title="Já possuo conta"
+          title="Entrar como convidado"
           outlined={true}
-          onPress={() => props.navigation.navigate("loginPage")}
+          onPress={() => props.navigation.navigate("languagePage")}
         />
       </ButtonsDiv>
     </SafeAreaView>

@@ -21,7 +21,7 @@ const MainPage = (props) => {
         <SelectLanguage
           onPress={() => props.navigation.navigate("languagePage")}
         >
-          <Text>{selectedLanguage.label}</Text>
+          <Text>{selectedLanguage?.label}</Text>
         </SelectLanguage>
       </Header>
       {musics.map((music) => (
