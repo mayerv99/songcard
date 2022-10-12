@@ -24,7 +24,7 @@ const InitialPage = (props) => {
   const [accessToken, setAccessToken] = useState();
   const { currentUser, setCurrentUser } = useCurrentUser();
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       "855045027433-l2fi7m7bj2bf11e0ea9go8s7rl021mb5.apps.googleusercontent.com",
     iosClientId:
