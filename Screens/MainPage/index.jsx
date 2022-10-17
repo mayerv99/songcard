@@ -15,11 +15,11 @@ const MainPage = (props) => {
   // const [isSearchingOpen, setIsSearchingOpen] = useState(false);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
       <Header>
         <SectionTitle>Minhas músicas</SectionTitle>
         <SelectLanguage
-          onPress={() => props.navigation.navigate("languagePage")}
+        // onPress={() => props.navigation.navigate("languagePage")}
         >
           <Text>{selectedLanguage?.label}</Text>
         </SelectLanguage>

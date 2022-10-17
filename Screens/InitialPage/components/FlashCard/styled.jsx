@@ -5,7 +5,7 @@ export const Wrapper = styled.TouchableOpacity`
   margin: 70px auto;
   background-color: ${(props) => props.theme.background.primary};
   min-height: 75px;
-  border-radius: 10;
+  border-radius: 10px;
   padding: 20px;
 `;
 

@@ -14,7 +14,7 @@ export const RoundedPic = styled.View`
   width: 75px;
   height: 75px;
   background-color: white;
-  border-radius: 100;
+  border-radius: 100px;
 `;
 
 export const MusicAndArtist = styled.View`

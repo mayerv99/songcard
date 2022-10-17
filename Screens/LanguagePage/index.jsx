@@ -16,12 +16,12 @@ const LanguagePage = (props) => {
 
   const handleSelectLanguage = (selected) => {
     setSelectedLanguage(selected);
-    props.navigation.navigate("mainPage");
+    props.navigation.navigate("appBarRoutes");
   };
 
   return (
     <SafeAreaView>
-      <AppName fontSize="32px" />
+      <AppName fontSize={32} />
       <Title>Selecione o idioma que deseja aprender</Title>
       <Wrapper>
         {languages.map((language, index) => (
