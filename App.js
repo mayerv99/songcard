@@ -2,6 +2,8 @@ import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 
+import { SafeAreaView } from "react-native";
+
 //StackNavigator
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";

@@ -54,7 +54,7 @@ const InitialPage = (props) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ alignItems: "center" }}>
         <Image source={require("../../assets/AppLogo.png")} />
       </View>

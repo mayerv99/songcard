@@ -8,7 +8,7 @@ import { Header, SelectLanguage, SectionTitle } from "./styled";
 
 import MusicCard from "../../Components/MusicCard";
 
-import { musics } from "./musicsArray";
+import { musics } from "./musicsListForPrototype/musicsArray";
 import { languages } from "../LanguagePage/languageList";
 
 const MainPage = (props) => {
