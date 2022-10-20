@@ -24,6 +24,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar style="auto" />
+
       <AuthenticationProvider>
         <LanguageProvider>
           <NavigationContainer>
@@ -38,27 +40,9 @@ export default function App() {
               <Stack.Screen name="noAppBarRoutes" component={NoAppBarRoutes} />
               <Stack.Screen name="appBarRoutes" component={AppBarRoutes} />
             </Stack.Navigator>
-
-            <StatusBar style="auto" />
           </NavigationContainer>
         </LanguageProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );
-}
-{
-  /* <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                cardStyle: {
-                  backgroundColor: "white",
-                },
-              }}
-            >
-              <Stack.Screen name="initialPage" component={InitialPage} />
-              <Stack.Screen name="loginPage" component={LoginPage} />
-              <Stack.Screen name="mainPage" component={MainPage} />
-              <Stack.Screen name="languagePage" component={LanguagePage} />
-              <Stack.Screen name="profilePage" component={ProfilePage} />
-            </Stack.Navigator> */
 }

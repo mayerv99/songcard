@@ -1,18 +1,26 @@
 import { Text, SafeAreaView } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import useLanguage from "../../Context/Hooks/useLanguage";
+import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
 import { Header, SelectLanguage, SectionTitle } from "./styled";
 
 import MusicCard from "../../Components/MusicCard";
 
 import { musics } from "./musicsArray";
+import { languages } from "../LanguagePage/languageList";
 
 const MainPage = (props) => {
-  const { selectedLanguage } = useLanguage();
+  const { setSelectedLanguage, selectedLanguage } = useLanguage();
+  const { currentUser } = useCurrentUser();
 
-  // const [isSearchingOpen, setIsSearchingOpen] = useState(false);
+  useEffect(() => {
+    const usersDefaultLanguage = languages.filter(
+      (language) => language?.alias === currentUser?.locale
+    );
+    setSelectedLanguage(usersDefaultLanguage[0]);
+  }, [currentUser]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>

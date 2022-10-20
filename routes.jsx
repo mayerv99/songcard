@@ -1,4 +1,5 @@
 import React from "react";
+import { View, TouchableOpacity, Text } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -44,7 +45,22 @@ function AppBarRoutes() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { borderRadius: 10 },
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 25,
+          marginHorizontal: 20,
+          elevation: 0,
+          backgroundColor: "#f3f3f8",
+          borderRadius: 25,
+          height: 80,
+          shadowColor: "#000",
+          shadowOpacity: 0.06,
+          shadowOffset: {
+            width: 10,
+            height: 10,
+          },
+        },
         tabBarActiveTintColor: "#7512f3",
       }}
     >
@@ -54,11 +70,13 @@ function AppBarRoutes() {
         options={{
           tabBarLabel: "Músicas",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-music-outline"
-              size={25}
-              color={color}
-            />
+            <View style={{ position: "absolute", top: "50%" }}>
+              <MaterialCommunityIcons
+                name="account-music-outline"
+                size={25}
+                color={color}
+              />
+            </View>
           ),
         }}
       />
@@ -68,21 +86,26 @@ function AppBarRoutes() {
         options={{
           tabBarLabel: "Aprendizado",
           tabBarIcon: ({ color }) => (
-            <SimpleLineIcons name="graduation" size={25} color={color} />
+            <View style={{ position: "absolute", top: "50%" }}>
+              <SimpleLineIcons name="graduation" size={25} color={color} />
+            </View>
           ),
         }}
       />
+
       <Tab.Screen
         name="collectionPage"
         component={CollectionPage}
         options={{
           tabBarLabel: "Coleção",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="card-multiple-outline"
-              size={25}
-              color={color}
-            />
+            <View style={{ position: "absolute", top: "50%" }}>
+              <MaterialCommunityIcons
+                name="card-multiple-outline"
+                size={25}
+                color={color}
+              />
+            </View>
           ),
         }}
       />
@@ -92,7 +115,9 @@ function AppBarRoutes() {
         options={{
           tabBarLabel: "Perfil",
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user" size={24} color={color} />
+            <View style={{ position: "absolute", top: "50%" }}>
+              <FontAwesome5 name="user" size={24} color={color} />
+            </View>
           ),
         }}
       />
