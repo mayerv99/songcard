@@ -35,7 +35,6 @@ const InitialPage = (props) => {
 
   useEffect(() => {
     if (response?.type === "success") {
-      console.log("response ", response);
       setAccessToken(response.authentication?.accessToken);
       accessToken && handleGoogleSignIn();
     }
@@ -51,11 +50,11 @@ const InitialPage = (props) => {
 
   const handleGoogleSignIn = () => {
     fetchUserInfo();
-    props.navigation.replace("profilePage");
+    props.navigation.replace("appBarRoutes");
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ alignItems: "center" }}>
         <Image source={require("../../assets/AppLogo.png")} />
       </View>

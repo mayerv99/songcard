@@ -3,7 +3,7 @@
     "name": "songcard",
     "slug": "songcard",
     "scheme": "com.tcc.songcard",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,6 @@
     },
     "android": {
       "package": "com.tcc.songcard",
-
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -30,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b9a64fc0-7963-490f-9e87-dbff0b1f1043"
+      }
     }
   }
 }

@@ -2,6 +2,8 @@ import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 
+import { SafeAreaView } from "react-native";
+
 //StackNavigator
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -10,12 +12,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme.jsx";
 
-// Screens
-import InitialPage from "./Screens/InitialPage/index.jsx";
-import LoginPage from "./Screens/LoginPage/index.jsx";
-import MainPage from "./Screens/MainPage/index.jsx";
-import LanguagePage from "./Screens/LanguagePage/index.jsx";
-import ProfilePage from "./Screens/ProfilePage/index.jsx";
+//AppBarScreens
+import { NoAppBarRoutes, AppBarRoutes } from "./routes.jsx";
+
+//NoAppBarScreens
 
 //Context
 import AuthenticationProvider from "./Context/AuthenticationContext.jsx";
@@ -26,6 +26,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar style="auto" />
+
       <AuthenticationProvider>
         <LanguageProvider>
           <NavigationContainer>
@@ -37,14 +39,9 @@ export default function App() {
                 },
               }}
             >
-              <Stack.Screen name="initialPage" component={InitialPage} />
-              <Stack.Screen name="loginPage" component={LoginPage} />
-              <Stack.Screen name="mainPage" component={MainPage} />
-              <Stack.Screen name="languagePage" component={LanguagePage} />
-              <Stack.Screen name="profilePage" component={ProfilePage} />
+              <Stack.Screen name="noAppBarRoutes" component={NoAppBarRoutes} />
+              <Stack.Screen name="appBarRoutes" component={AppBarRoutes} />
             </Stack.Navigator>
-
-            <StatusBar style="auto" />
           </NavigationContainer>
         </LanguageProvider>
       </AuthenticationProvider>

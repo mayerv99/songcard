@@ -7,15 +7,28 @@ import {
   ProfilePic,
   Button,
   ButtonText,
+  Languages,
+  Title,
+  ImagesWrapper,
+  PerformanceWrapper,
+  DoubleCardsWrapper,
 } from "./styled";
+
+import StatusCard from "./Components/StatusCard";
 
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
-export default function ProfilePage() {
+export default function ProfilePage(props) {
   const { currentUser } = useCurrentUser();
+
   return (
-    <Wrapper>
-      <UserDataWrapper>
+    <Wrapper style={{ backgroundColor: "white", minHeight: "100%" }}>
+      <UserDataWrapper
+        style={{
+          borderBottomColor: "#f3f3f8",
+          borderBottomWidth: 2,
+        }}
+      >
         <NameAndEmailWrapper>
           <UserName>
             {currentUser?.given_name} {currentUser?.family_name}
@@ -29,9 +42,24 @@ export default function ProfilePage() {
         />
       </UserDataWrapper>
 
-      <Button>
+      {/* <Button>
         <ButtonText>Sair</ButtonText>
-      </Button>
+      </Button> */}
+      <Title>Idiomas favoritos</Title>
+
+      <Languages style={{ borderBottomColor: "#f3f3f8", borderBottomWidth: 2 }}>
+        <ImagesWrapper></ImagesWrapper>
+      </Languages>
+      <Title>Performance</Title>
+      <PerformanceWrapper
+        style={{ borderBottomColor: "#f3f3f8", borderBottomWidth: 2 }}
+      >
+        <DoubleCardsWrapper>
+          <StatusCard title="Número de músicas" value={0} />
+          <StatusCard title="Número de flashcards" value={0} />
+        </DoubleCardsWrapper>
+      </PerformanceWrapper>
+      <Title>Conquistas</Title>
     </Wrapper>
   );
 }
