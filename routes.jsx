@@ -138,14 +138,15 @@ function AppBarRoutes() {
 
         <Tab.Screen
           name="CARLOS"
-          component={CollectionPage}
+          component={() => {}}
+          listeners={() => ({tabPress: e => e.preventDefault()})}
           options={{
-            tabBarLabelStyle: { display: "none" },
-            tabBarIcon: ({ color }) => (
-              <View style={{ marginVertical: "auto" }}>
-                <Feather name="plus" size={25} color={color} />
-              </View>
-            ),
+              tabBarLabelStyle: { display: "none" },
+              tabBarIcon: ({ color }) => (
+                <View style={{ marginVertical: "auto" }}>
+                  <Feather name="plus" size={25} color={color} />
+                </View>
+              ),
           }}
         />
         <Tab.Screen
