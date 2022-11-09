@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Image } from "react-native";
-
 import {
   Wrapper,
   RoundedPic,
@@ -10,19 +8,14 @@ import {
   ArtistName,
 } from "./styled";
 
-const MusicCard = ({ music }) => {
-  const imagePath = `../../Screens/MainPage/musicsListForPrototype/vivaLaVida.png`;
+const MusicCard = ({music}) => {
   return (
     <Wrapper>
       <RoundedPic>
-        <Image
-          style={{ width: "100%", height: "100%", borderRadius: 50 }}
-          source={require(imagePath)}
-        />
       </RoundedPic>
       <MusicAndArtist>
-        <MusicName>{music.musicName}</MusicName>
-        <ArtistName>{music.artist}</ArtistName>
+        <MusicName>{music.track_name}</MusicName>
+        <ArtistName>{music.artist_name}</ArtistName>
       </MusicAndArtist>
     </Wrapper>
   );
