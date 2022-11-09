@@ -20,3 +20,5 @@ export const SelectLanguage = styled.Pressable`
 export const SectionTitle = styled.Text`
   font-size: 16px;
 `;
+
+export const List = styled.FlatList``;
