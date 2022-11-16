@@ -19,16 +19,20 @@ export const RoundedPic = styled.View`
 
 export const MusicAndArtist = styled.View`
   display: flex;
+  width: 100%;
   height: 75px;
   display: flex;
   justify-content: space-around;
   margin-left: 10px;
 `;
+
 export const MusicName = styled.Text`
+  width: 72%;
   font-size: ${(props) => props.theme.font.sizes.title};
   font-weight: 600;
 `;
 
 export const ArtistName = styled.Text`
+  width: 72%;
   font-size: ${(props) => props.theme.font.sizes.subTitle};
 `;
