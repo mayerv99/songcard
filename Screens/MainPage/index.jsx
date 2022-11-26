@@ -54,7 +54,9 @@ const MainPage = (props) => {
       {list ?
         <List
           data={list}
-          renderItem={({item}) => <MusicCard key={item.track.track_id} music={item.track} />}
+          renderItem={({item}) =>
+            <MusicCard key={item.track.track_id} music={item.track} navigation={props.navigation} />
+          }
           keyExtractor={({track}) => track.track_id}
         />
       :
