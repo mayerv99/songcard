@@ -12,17 +12,21 @@ export const LyricsWrapper = styled.ScrollView.attrs({
   max-height: 65%;
 `;
 
-export const Word = styled.Text`
-  padding: 0 2px;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
+export const Word = styled.TouchableOpacity`
   margin: 2px 0;
-  padding: 2px;
+  border-radius: 5px;
   ${(props) =>
     props.selected &&
     `background-color: ${props.theme.colors.primary}; color: white;`};
-  border-radius: 5px;
+`;
+
+export const WordText = styled.Text`
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 2px;
+
+  ${(props) => props.selected && `color: white;`};
 `;
 
 export const Navbar = styled(LinearGradient).attrs({

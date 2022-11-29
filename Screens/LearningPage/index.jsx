@@ -16,6 +16,7 @@ import {
   TextDescription,
   SongTitle,
   ArtistName,
+  WordText,
 } from "./styled";
 
 function LearningPage({ navigation }) {
@@ -117,7 +118,15 @@ function LearningPage({ navigation }) {
                     }
                     selected={checkIfWordExists({ lineIndex, wordIndex, word })}
                   >
-                    {word}
+                    <WordText
+                      selected={checkIfWordExists({
+                        lineIndex,
+                        wordIndex,
+                        word,
+                      })}
+                    >
+                      {word}
+                    </WordText>
                   </Word>
                 </View>
               ))}
