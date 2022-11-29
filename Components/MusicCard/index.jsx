@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
+
+import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 
 import {
   Wrapper,
@@ -8,9 +10,16 @@ import {
   ArtistName,
 } from "./styled";
 
-const MusicCard = ({music}) => {
+const MusicCard = ({ music, navigation }) => {
+  const { setCurrentSong } = useCurrentSong();
+
+  const handlePress = useCallback(() => {
+    setCurrentSong(music);
+    navigation.navigate("learningPage");
+  }, [music]);
+
   return (
-    <Wrapper>
+    <Wrapper onPress={handlePress}>
       <RoundedPic>
       </RoundedPic>
       <MusicAndArtist>

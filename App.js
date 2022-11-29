@@ -20,6 +20,7 @@ import { NoAppBarRoutes, AppBarRoutes } from "./routes.jsx";
 //Context
 import AuthenticationProvider from "./Context/AuthenticationContext.jsx";
 import LanguageProvider from "./Context/LanguageContext";
+import CurrentSongProvider from "./Context/CurrentSongContext";
 
 const Stack = createStackNavigator();
 
@@ -30,19 +31,21 @@ export default function App() {
 
       <AuthenticationProvider>
         <LanguageProvider>
-          <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                cardStyle: {
-                  backgroundColor: "white",
-                },
-              }}
-            >
-              <Stack.Screen name="noAppBarRoutes" component={NoAppBarRoutes} />
-              <Stack.Screen name="appBarRoutes" component={AppBarRoutes} />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <CurrentSongProvider>
+            <NavigationContainer>
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false,
+                  cardStyle: {
+                    backgroundColor: "white",
+                  },
+                }}
+              >
+                <Stack.Screen name="noAppBarRoutes" component={NoAppBarRoutes} />
+                <Stack.Screen name="appBarRoutes" component={AppBarRoutes} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </CurrentSongProvider>
         </LanguageProvider>
       </AuthenticationProvider>
     </ThemeProvider>
