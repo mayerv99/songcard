@@ -11,17 +11,17 @@ import {
 } from "./styled";
 
 const MusicCard = ({ music, navigation }) => {
-  const { setCurrentSong } = useCurrentSong();
+  const { setCurrentSong, addNewListenedSong } = useCurrentSong();
 
   const handlePress = useCallback(() => {
     setCurrentSong(music);
     navigation.navigate("learningPage");
+    addNewListenedSong(music);
   }, [music]);
 
   return (
     <Wrapper onPress={handlePress}>
-      <RoundedPic>
-      </RoundedPic>
+      <RoundedPic></RoundedPic>
       <MusicAndArtist>
         <MusicName>{music.track_name}</MusicName>
         <ArtistName>{music.artist_name}</ArtistName>

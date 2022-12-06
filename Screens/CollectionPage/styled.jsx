@@ -2,34 +2,46 @@ import styled from "styled-components";
 
 import { LinearGradient } from "expo-linear-gradient";
 
-export const LyricsWrapper = styled.ScrollView.attrs({
-  contentContainerStyle: { paddingVertical: 25, paddingHorizontal: 20 },
+export const CardsWrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    paddingVertical: 25,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
 })`
   width: 90%;
-  margin: 50px auto;
-  background-color: ${(props) => props.theme.background.primary};
-  border-radius: 10px;
+  margin: 40px auto 0;
   max-height: 65%;
 `;
 
-export const Word = styled.TouchableOpacity`
-  margin: 2px 0;
+export const FlashCardWrapper = styled.View`
+  width: 49%;
+  background-color: ${(props) => props.theme.background.primary};
+  padding: 10px;
   border-radius: 5px;
-  ${(props) =>
-    props.selected &&
-    `background-color: ${props.theme.colors.primary}; color: white;`};
+  margin: 10px 0;
 `;
 
-export const WordText = styled.Text`
-  font-size: 18px;
+export const FlashCardHeader = styled.View`
+  border-bottom: 2px solid white;
+`;
+
+export const FlashCardTitle = styled.Text`
   font-weight: 600;
-  line-height: 28px;
-  padding: 2px;
-
-  ${(props) => props.selected && `color: white;`};
+  font-size: 14px;
 `;
 
-export const Navbar = styled(LinearGradient).attrs({
+export const FlashCardBody = styled.View`
+  padding: 10px 0;
+`;
+
+export const FlashCardBodyText = styled.Text`
+  font-size: 12px;
+`;
+
+export const TopBar = styled(LinearGradient).attrs({
   colors: ["#7615F3", "rgba(117, 22, 242, 0.63)"],
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
@@ -55,7 +67,6 @@ export const InfoCard = styled.View`
   justify-content: space-around;
   flex-direction: row;
 `;
-
 export const InfoGroup = styled.View`
   display: flex;
   justify-content: center;
@@ -67,14 +78,4 @@ export const TextCount = styled.Text`
 
 export const TextDescription = styled.Text`
   color: #818181;
-`;
-
-export const SongTitle = styled.Text`
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-`;
-export const ArtistName = styled.Text`
-  color: white;
-  font-size: 14px;
 `;

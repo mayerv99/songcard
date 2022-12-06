@@ -57,7 +57,7 @@ function AppBarRoutes() {
     width = width - 70;
 
     //Total tabs
-    return width / 5;
+    return width / 4;
   };
 
   const calculateAppBarHeight = () => {
@@ -129,26 +129,13 @@ function AppBarRoutes() {
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth(),
+                toValue: getWidth() * 1,
                 useNativeDriver: true,
               }).start();
             },
           })}
         />
 
-        <Tab.Screen
-          name="CARLOS"
-          component={() => {}}
-          listeners={() => ({tabPress: e => e.preventDefault()})}
-          options={{
-              tabBarLabelStyle: { display: "none" },
-              tabBarIcon: ({ color }) => (
-                <View style={{ marginVertical: "auto" }}>
-                  <Feather name="plus" size={25} color={color} />
-                </View>
-              ),
-          }}
-        />
         <Tab.Screen
           name="collectionPage"
           component={CollectionPage}
@@ -167,7 +154,7 @@ function AppBarRoutes() {
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 3,
+                toValue: getWidth() * 2,
                 useNativeDriver: true,
               }).start();
             },
@@ -187,7 +174,7 @@ function AppBarRoutes() {
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4.1,
+                toValue: getWidth() * 3.1,
                 useNativeDriver: true,
               }).start();
             },
