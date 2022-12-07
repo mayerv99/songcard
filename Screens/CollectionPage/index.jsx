@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { SafeAreaView } from "react-native";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
@@ -15,10 +15,28 @@ import {
   FlashCardTitle,
   FlashCardBody,
   FlashCardBodyText,
+  SongTitle,
+  ArtistName,
 } from "./styled";
 
 function CollectionPage() {
   const { selectedWords, listenedSongs } = useCurrentSong();
+
+  const [flashCardsMusic, setFlashCardsMusic] = useState(null);
+
+  const infoCardData = () => {
+    return !flashCardsMusic
+      ? [
+          { label: "Músicas", value: listenedSongs?.length },
+          { label: "Flashcards", value: selectedWords?.length },
+          { label: "Tot. palavras", value: selectedWords?.length },
+        ]
+      : [
+          { label: "Palavras", value: selectedWords?.length },
+          { label: "Expressões", value: selectedWords?.length },
+          { label: "Tot. palavras", value: selectedWords?.length },
+        ];
+  };
 
   const shadowStyle = {
     shadowColor: "#000",
@@ -29,45 +47,71 @@ function CollectionPage() {
     },
   };
 
-  const generateSongFlashCard = useMemo(
+  const handleSelectSong = (song) => {
+    setFlashCardsMusic(song);
+  };
+
+  const generateSongsFlashCard = useMemo(
     () =>
       listenedSongs.map((song) => (
-        <>
-          <FlashCardWrapper>
-            <FlashCardHeader>
-              <FlashCardTitle>{song?.track_name}</FlashCardTitle>
-            </FlashCardHeader>
-            <FlashCardBody>
-              <FlashCardBodyText>
-                by {song?.artist_name.substring(0, 15)}
-                {song?.artist_name?.length > 15 && "..."}
-              </FlashCardBodyText>
-            </FlashCardBody>
-          </FlashCardWrapper>
-        </>
+        <FlashCardWrapper onPress={() => handleSelectSong(song)}>
+          <FlashCardHeader>
+            <FlashCardTitle>{song?.track_name}</FlashCardTitle>
+          </FlashCardHeader>
+          <FlashCardBody>
+            <FlashCardBodyText>
+              by {song?.artist_name.substring(0, 15)}
+              {song?.artist_name?.length > 15 && "..."}
+            </FlashCardBodyText>
+          </FlashCardBody>
+        </FlashCardWrapper>
       )),
     [listenedSongs]
+  );
+
+  const generateWordsFlashCard = useMemo(() =>
+    selectedWords.map((word) => (
+      <FlashCardWrapper onPress={() => handleSelectSong(word)}>
+        <FlashCardHeader>
+          <FlashCardTitle>{word?.track_name}</FlashCardTitle>
+        </FlashCardHeader>
+        <FlashCardBody>
+          <FlashCardBodyText></FlashCardBodyText>
+        </FlashCardBody>
+      </FlashCardWrapper>
+    ))
   );
 
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
       <TopBar>
+        {flashCardsMusic && (
+          <FlashCardBodyText onPress={() => setFlashCardsMusic(null)}>
+            Voltar
+          </FlashCardBodyText>
+        )}
+        {flashCardsMusic ? (
+          <>
+            <SongTitle>{flashCardsMusic?.track_name}</SongTitle>
+            <ArtistName>{flashCardsMusic?.artist_name}</ArtistName>
+          </>
+        ) : (
+          <>
+            <SongTitle>Suas músicas</SongTitle>
+          </>
+        )}
         <InfoCard style={shadowStyle}>
-          <InfoGroup>
-            <TextCount>{listenedSongs?.length}</TextCount>
-            <TextDescription>Músicas</TextDescription>
-          </InfoGroup>
-          <InfoGroup>
-            <TextCount>{selectedWords?.length}</TextCount>
-            <TextDescription>Flashcards</TextDescription>
-          </InfoGroup>
-          <InfoGroup>
-            <TextCount>{selectedWords?.length}</TextCount>
-            <TextDescription>Tot. palavras</TextDescription>
-          </InfoGroup>
+          {infoCardData().map((data) => (
+            <InfoGroup>
+              <TextCount>{data.value}</TextCount>
+              <TextDescription>{data.label}</TextDescription>
+            </InfoGroup>
+          ))}
         </InfoCard>
       </TopBar>
-      <CardsWrapper>{generateSongFlashCard}</CardsWrapper>
+      <CardsWrapper>
+        {!flashCardsMusic ? generateSongsFlashCard : generateWordsFlashCard}
+      </CardsWrapper>
     </SafeAreaView>
   );
 }

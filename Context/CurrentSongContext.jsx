@@ -7,10 +7,6 @@ export default function CurrentSongProvider({ children }) {
   const [selectedWords, setSelectedWords] = useState([]);
   const [listenedSongs, setListenedsSongs] = useState([]);
 
-  useEffect(() => {
-    setSelectedWords([]);
-  }, [currentSong]);
-
   return (
     <CurrentSongContext.Provider
       value={{

@@ -13,10 +13,10 @@ export const CardsWrapper = styled.ScrollView.attrs({
 })`
   width: 90%;
   margin: 40px auto 0;
-  max-height: 65%;
+  max-height: 70%;
 `;
 
-export const FlashCardWrapper = styled.View`
+export const FlashCardWrapper = styled.TouchableOpacity`
   width: 49%;
   background-color: ${(props) => props.theme.background.primary};
   padding: 10px;
@@ -78,4 +78,14 @@ export const TextCount = styled.Text`
 
 export const TextDescription = styled.Text`
   color: #818181;
+`;
+
+export const SongTitle = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+`;
+export const ArtistName = styled.Text`
+  color: white;
+  font-size: 14px;
 `;

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { CurrentSongContext } from "../CurrentSongContext";
 
@@ -12,6 +12,12 @@ export default function useCurrentSong() {
     listenedSongs,
     setListenedsSongs,
   } = useContext(CurrentSongContext);
+
+  useEffect(() => {
+    setSelectedWords([]);
+  }, [currentSong]);
+
+  const addWordsToSong = (word) => {};
 
   const addNewListenedSong = (newSong) => {
     if (musicAlreadyOnList(newSong)) {
