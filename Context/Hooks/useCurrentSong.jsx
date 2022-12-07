@@ -19,6 +19,7 @@ export default function useCurrentSong() {
 
   const addWordsToSong = (word) => {};
 
+  // Fix function, creating a new value even when value already exists
   const addNewListenedSong = (newSong) => {
     if (musicAlreadyOnList(newSong)) {
       console.log("Já existe");
@@ -29,7 +30,7 @@ export default function useCurrentSong() {
   };
 
   const musicAlreadyOnList = (newSong) => {
-    return listenedSongs.some((song) => _.isEqual(song, newSong));
+    return listenedSongs.some((song) => song.track_id === newSong.track_id);
   };
 
   return {

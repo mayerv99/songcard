@@ -80,19 +80,22 @@ function LearningPage({ navigation }) {
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
       <Navbar>
-        <SongTitle>{currentSong?.track_name}</SongTitle>
-        <ArtistName>{currentSong?.artist_name}</ArtistName>
+        <SongTitle>
+          {currentSong?.track_name.substring(0, 25)}
+          {currentSong?.track_name.length > 25 && "..."}
+        </SongTitle>
+        <ArtistName>
+          {currentSong?.artist_name.substring(0, 25)}
+          {currentSong?.artist_name.length > 25 && "..."}
+        </ArtistName>
         <InfoCard style={shadowStyle}>
           <InfoGroup>
             <TextCount>{selectedWords?.length}</TextCount>
-            <TextDescription>Palavras</TextDescription>
+            <TextDescription>Palavras selecionadas</TextDescription>
           </InfoGroup>
+
           <InfoGroup>
-            <TextCount>2</TextCount>
-            <TextDescription>Expressões</TextDescription>
-          </InfoGroup>
-          <InfoGroup>
-            <TextCount>{selectedWords?.length}</TextCount>
+            <TextCount>{lyrics?.length}</TextCount>
             <TextDescription>Tot. palavras</TextDescription>
           </InfoGroup>
         </InfoCard>
