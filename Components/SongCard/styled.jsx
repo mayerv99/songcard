@@ -10,14 +10,14 @@ export const Wrapper = styled.Pressable`
   border-radius: 10px;
 `;
 
-export const RoundedPic = styled.View`
+export const RoundedPic = styled.Image`
   width: 75px;
   height: 75px;
   background-color: white;
   border-radius: 100px;
 `;
 
-export const MusicAndArtist = styled.View`
+export const SongNameAndArtist = styled.View`
   display: flex;
   width: 100%;
   height: 75px;
@@ -26,7 +26,7 @@ export const MusicAndArtist = styled.View`
   margin-left: 10px;
 `;
 
-export const MusicName = styled.Text`
+export const SongName = styled.Text`
   width: 72%;
   font-size: ${(props) => props.theme.font.sizes.title};
   font-weight: 600;
