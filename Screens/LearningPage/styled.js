@@ -6,7 +6,7 @@ export const LyricsWrapper = styled.ScrollView.attrs({
   contentContainerStyle: { paddingVertical: 25, paddingHorizontal: 20 },
 })`
   width: 90%;
-  margin: 50px auto;
+  margin: 60px auto 30px;
   background-color: ${(props) => props.theme.background.primary};
   border-radius: 10px;
   max-height: 65%;
