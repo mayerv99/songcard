@@ -50,10 +50,7 @@ function LearningPage({ navigation }) {
   const shadowStyle = {
     shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
+    shadowOffset: {height: 5},
   };
 
   const checkIfWordExists = (selectedWord) => {
