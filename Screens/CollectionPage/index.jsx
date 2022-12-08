@@ -1,10 +1,117 @@
-import { SafeAreaView, Text } from "react-native";
-import React from "react";
+import React, { useState, useMemo } from "react";
+import { SafeAreaView } from "react-native";
+
+import useCurrentSong from "../../Context/Hooks/useCurrentSong";
+
+import {
+  TopBar,
+  InfoCard,
+  InfoGroup,
+  TextCount,
+  TextDescription,
+  CardsWrapper,
+  FlashCardWrapper,
+  FlashCardHeader,
+  FlashCardTitle,
+  FlashCardBody,
+  FlashCardBodyText,
+  SongTitle,
+  ArtistName,
+} from "./styled";
 
 function CollectionPage() {
+  const { selectedWords, listenedSongs } = useCurrentSong();
+
+  const [flashCardsMusic, setFlashCardsMusic] = useState(null);
+
+  const infoCardData = () => {
+    return !flashCardsMusic
+      ? [
+          { label: "Músicas", value: listenedSongs?.length },
+          { label: "Flashcards", value: selectedWords?.length },
+          { label: "Tot. palavras", value: selectedWords?.length },
+        ]
+      : [
+          { label: "Palavras", value: selectedWords?.length },
+          { label: "Expressões", value: selectedWords?.length },
+          { label: "Tot. palavras", value: selectedWords?.length },
+        ];
+  };
+
+  const shadowStyle = {
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
+  };
+
+  const handleSelectSong = (song) => {
+    setFlashCardsMusic(song);
+  };
+
+  const generateSongsFlashCard = useMemo(
+    () =>
+      listenedSongs.map((song) => (
+        <FlashCardWrapper onPress={() => handleSelectSong(song)}>
+          <FlashCardHeader>
+            <FlashCardTitle>{song?.track_name}</FlashCardTitle>
+          </FlashCardHeader>
+          <FlashCardBody>
+            <FlashCardBodyText>
+              by {song?.artist_name.substring(0, 15)}
+              {song?.artist_name?.length > 15 && "..."}
+            </FlashCardBodyText>
+          </FlashCardBody>
+        </FlashCardWrapper>
+      )),
+    [listenedSongs]
+  );
+
+  const generateWordsFlashCard = useMemo(() =>
+    selectedWords.map((word) => (
+      <FlashCardWrapper onPress={() => handleSelectSong(word)}>
+        <FlashCardHeader>
+          <FlashCardTitle>{word?.track_name}</FlashCardTitle>
+        </FlashCardHeader>
+        <FlashCardBody>
+          <FlashCardBodyText></FlashCardBodyText>
+        </FlashCardBody>
+      </FlashCardWrapper>
+    ))
+  );
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
-      <Text>CollectionPage</Text>
+      <TopBar>
+        {flashCardsMusic && (
+          <FlashCardBodyText onPress={() => setFlashCardsMusic(null)}>
+            Voltar
+          </FlashCardBodyText>
+        )}
+        {flashCardsMusic ? (
+          <>
+            <SongTitle>{flashCardsMusic?.track_name}</SongTitle>
+            <ArtistName>{flashCardsMusic?.artist_name}</ArtistName>
+          </>
+        ) : (
+          <>
+            <SongTitle>Suas músicas</SongTitle>
+          </>
+        )}
+        <InfoCard style={shadowStyle}>
+          {infoCardData().map((data) => (
+            <InfoGroup>
+              <TextCount>{data.value}</TextCount>
+              <TextDescription>{data.label}</TextDescription>
+            </InfoGroup>
+          ))}
+        </InfoCard>
+      </TopBar>
+      <CardsWrapper>
+        {!flashCardsMusic ? generateSongsFlashCard : generateWordsFlashCard}
+      </CardsWrapper>
     </SafeAreaView>
   );
 }

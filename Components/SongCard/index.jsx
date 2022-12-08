@@ -10,21 +10,22 @@ import {
   ArtistName,
 } from "./styled";
 
-const SongCard = ({ song, navigation }) => {
-  const { setCurrentSong } = useCurrentSong();
+const MusicCard = ({ music, navigation }) => {
+  const { setCurrentSong, addNewListenedSong } = useCurrentSong();
 
   const handlePress = useCallback(() => {
     setCurrentSong(song);
     navigation.navigate("learningPage");
-  }, [song]);
+    addNewListenedSong(music);
+  }, [music]);
 
   return (
     <Wrapper onPress={handlePress}>
-      <RoundedPic source={{uri: song.img}}></RoundedPic>
-      <SongNameAndArtist>
-        <SongName>{song.name}</SongName>
-        <ArtistName>{song.artist}</ArtistName>
-      </SongNameAndArtist>
+      <RoundedPic></RoundedPic>
+      <MusicAndArtist>
+        <MusicName>{music.track_name}</MusicName>
+        <ArtistName>{music.artist_name}</ArtistName>
+      </MusicAndArtist>
     </Wrapper>
   );
 };
