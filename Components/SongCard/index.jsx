@@ -5,29 +5,28 @@ import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 import {
   Wrapper,
   RoundedPic,
-  MusicAndArtist,
-  MusicName,
+  SongNameAndArtist,
+  SongName,
   ArtistName,
 } from "./styled";
 
-const MusicCard = ({ music, navigation }) => {
+const SongCard = ({ song, navigation }) => {
   const { setCurrentSong } = useCurrentSong();
 
   const handlePress = useCallback(() => {
-    setCurrentSong(music);
+    setCurrentSong(song);
     navigation.navigate("learningPage");
-  }, [music]);
+  }, [song]);
 
   return (
     <Wrapper onPress={handlePress}>
-      <RoundedPic>
-      </RoundedPic>
-      <MusicAndArtist>
-        <MusicName>{music.track_name}</MusicName>
-        <ArtistName>{music.artist_name}</ArtistName>
-      </MusicAndArtist>
+      <RoundedPic source={{uri: song.img}}></RoundedPic>
+      <SongNameAndArtist>
+        <SongName>{song.name}</SongName>
+        <ArtistName>{song.artist}</ArtistName>
+      </SongNameAndArtist>
     </Wrapper>
   );
 };
 
-export default MusicCard;
+export default SongCard;
