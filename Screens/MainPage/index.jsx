@@ -1,13 +1,13 @@
 import { Text, SafeAreaView } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
-import api from "../../services/api";
+import useReadFirebase from "../../Context/Hooks/useReadFirebase";
 
 import useLanguage from "../../Context/Hooks/useLanguage";
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
 import { List, Header, SelectLanguage, SectionTitle } from "./styled";
 
-import MusicCard from "../../Components/MusicCard";
+import SongCard from "../../Components/SongCard";
 
 import { languages } from "../LanguagePage/languageList";
 
@@ -18,13 +18,11 @@ const MainPage = (props) => {
   const [list, setList] = useState();
 
   const getList = useCallback(async () => {
-    const endpoint =
-      "/chart.tracks.get?chart_name=mxmweekly&page=1&page_size=15&country=us&f_has_lyrics=1&apikey=4306ade10d6239b3b17e0aadf07f0ff9";
 
-    const data = await api.get(endpoint).then((res) => res.data);
+    const data = await useReadFirebase('Songs');
 
     if (data) {
-      setList(data.message?.body?.track_list);
+      setList(data);
       return;
     }
 
@@ -53,14 +51,10 @@ const MainPage = (props) => {
       {list ? (
         <List
           data={list}
-          renderItem={({ item }) => (
-            <MusicCard
-              key={item.track.track_id}
-              music={item.track}
-              navigation={props.navigation}
-            />
+          renderItem={({item}) => (
+            <SongCard key={item.id} song={item} navigation={props.navigation} />
           )}
-          keyExtractor={({ track }) => track.track_id}
+          keyExtractor={({ id }) => id}
         />
       ) : (
         <></>
