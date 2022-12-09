@@ -29,6 +29,16 @@ export const WordText = styled.Text`
   ${(props) => props.selected && `color: white;`};
 `;
 
+export const PlayPauseButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 18%;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #7615F3;
+  border-radius: 50%;
+`
+
 export const Navbar = styled(LinearGradient).attrs({
   colors: ["#7615F3", "rgba(117, 22, 242, 0.63)"],
   start: { x: 0, y: 0 },

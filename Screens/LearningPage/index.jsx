@@ -1,6 +1,6 @@
 import { SafeAreaView, View, Text } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
-import api from "../../services/api";
+import React, { useState } from "react";
+import { Foundation } from '@expo/vector-icons';
 
 import _ from "lodash";
 
@@ -17,35 +17,37 @@ import {
   SongTitle,
   ArtistName,
   WordText,
+  PlayPauseButton
 } from "./styled";
 
 function LearningPage({ navigation }) {
-  const { currentSong, selectedWords, setSelectedWords } = useCurrentSong();
+  const { currentSong, selectedWords, setSelectedWords, songFile } = useCurrentSong();
 
-  const [lyrics, setLyrics] = useState();
+  const [playing, setPlaying] = useState(false);
+  // const [lyrics, setLyrics] = useState();
 
-  const getLyrics = useCallback(async () => {
-    if (currentSong === undefined) {
-      return;
-    }
+  //const getLyrics = useCallback(async () => {
+  //if (currentSong === undefined) {
+  //  return;
+  //}
 
-    const endpoint = `/track.lyrics.get?track_id=${currentSong.track_id}&apikey=4306ade10d6239b3b17e0aadf07f0ff9`,
-      data = await api.get(endpoint).then((res) => res.data),
-      lyrics = data?.message?.body?.lyrics?.lyrics_body;
+  //const endpoint = `/track.lyrics.get?track_id=${currentSong.track_id}&apikey=4306ade10d6239b3b17e0aadf07f0ff9`,
+  //  data = await api.get(endpoint).then((res) => res.data),
+  //  lyrics = data?.message?.body?.lyrics?.lyrics_body;
 
-    if (lyrics?.length) {
-      const rawLyrics = lyrics.split("");
-      rawLyrics.splice(-75);
-      setLyrics(rawLyrics.join(""));
-      return;
-    }
+  //if (lyrics?.length) {
+  //  const rawLyrics = lyrics.split("");
+  //  rawLyrics.splice(-75);
+  //  setLyrics(rawLyrics.join(""));
+  //  return;
+  //}
 
-    setLyrics(null);
-  }, [currentSong]);
+  //setLyrics(null);
+  //}, [currentSong]);
 
-  useEffect(() => {
-    getLyrics();
-  }, [getLyrics]);
+  //useEffect(() => {
+  //  getLyrics();
+  //}, [getLyrics]);
 
   const shadowStyle = {
     shadowColor: "#000",
@@ -74,16 +76,22 @@ function LearningPage({ navigation }) {
     return addWord(selectedWord);
   };
 
+  const handlePressPlayPause = () => {
+    playing === false && songFile.pauseAsync();
+    playing && songFile.playAsync();
+    setPlaying(prev => !prev);
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
       <Navbar>
         <SongTitle>
-          {currentSong?.track_name.substring(0, 25)}
-          {currentSong?.track_name.length > 25 && "..."}
+          {currentSong?.name.substring(0, 40)}
+          {currentSong?.name.length > 40 && "..."}
         </SongTitle>
         <ArtistName>
-          {currentSong?.artist_name.substring(0, 25)}
-          {currentSong?.artist_name.length > 25 && "..."}
+          {currentSong?.name.substring(0, 40)}
+          {currentSong?.name.length > 40 && "..."}
         </ArtistName>
         <InfoCard style={shadowStyle}>
           <InfoGroup>
@@ -92,7 +100,7 @@ function LearningPage({ navigation }) {
           </InfoGroup>
 
           <InfoGroup>
-            <TextCount>{lyrics?.length}</TextCount>
+            <TextCount>{currentSong?.lyrics?.length}</TextCount>
             <TextDescription>Tot. palavras</TextDescription>
           </InfoGroup>
         </InfoCard>
@@ -107,8 +115,8 @@ function LearningPage({ navigation }) {
         {currentSong === undefined && (
           <Text>← Volte e selecione uma música</Text>
         )}
-        {lyrics?.length &&
-          lyrics?.split("\n").map((line, lineIndex) => (
+        {currentSong?.lyrics?.length &&
+          currentSong?.lyrics?.split(/(?=[A-Z])/).map((line, lineIndex) => (
             <Text key={lineIndex}>
               {line.split(" ").map((word, wordIndex) => (
                 <View key={wordIndex}>
@@ -136,6 +144,13 @@ function LearningPage({ navigation }) {
           <Text>Falha ao carregar letra da música.</Text>
         )}
       </LyricsWrapper>
+
+      <PlayPauseButton
+        onPress={handlePressPlayPause}
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}
+      >
+        <Foundation name={playing ? 'play' : 'pause'} size={28} color="white" />
+      </PlayPauseButton>
     </SafeAreaView>
   );
 }

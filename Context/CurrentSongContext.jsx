@@ -6,6 +6,7 @@ export default function CurrentSongProvider({ children }) {
   const [currentSong, setCurrentSong] = useState();
   const [selectedWords, setSelectedWords] = useState([]);
   const [listenedSongs, setListenedsSongs] = useState([]);
+  const [songFile, setSongFile] = useState();
 
   return (
     <CurrentSongContext.Provider
@@ -16,6 +17,8 @@ export default function CurrentSongProvider({ children }) {
         setSelectedWords,
         listenedSongs,
         setListenedsSongs,
+        songFile,
+        setSongFile
       }}
     >
       {children}

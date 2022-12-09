@@ -13,6 +13,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //RoutesWithoutNavbar
 import InitialPage from "./Screens/InitialPage";
 import LanguagePage from "./Screens/LanguagePage";
+import useCurrentSong from "./Context/Hooks/useCurrentSong";
 
 //RoutesWithNavbar
 import MainPage from "./Screens/MainPage";
@@ -48,6 +49,8 @@ function NoAppBarRoutes() {
 }
 
 function AppBarRoutes() {
+  const { songFile } = useCurrentSong();
+
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   const getWidth = () => {
@@ -112,6 +115,7 @@ function AppBarRoutes() {
                 toValue: 0,
                 useNativeDriver: true,
               }).start();
+              songFile.unloadAsync();
             },
           })}
         />
@@ -157,6 +161,7 @@ function AppBarRoutes() {
                 toValue: getWidth() * 2,
                 useNativeDriver: true,
               }).start();
+              songFile.unloadAsync();
             },
           })}
         />
@@ -177,6 +182,7 @@ function AppBarRoutes() {
                 toValue: getWidth() * 3.1,
                 useNativeDriver: true,
               }).start();
+              songFile.unloadAsync();
             },
           })}
         />

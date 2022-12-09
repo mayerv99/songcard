@@ -56,12 +56,12 @@ function CollectionPage() {
       listenedSongs.map((song) => (
         <FlashCardWrapper onPress={() => handleSelectSong(song)}>
           <FlashCardHeader>
-            <FlashCardTitle>{song?.track_name}</FlashCardTitle>
+            <FlashCardTitle>{song?.name}</FlashCardTitle>
           </FlashCardHeader>
           <FlashCardBody>
             <FlashCardBodyText>
-              by {song?.artist_name.substring(0, 15)}
-              {song?.artist_name?.length > 15 && "..."}
+              by {song?.artist.substring(0, 15)}
+              {song?.artist?.length > 15 && "..."}
             </FlashCardBodyText>
           </FlashCardBody>
         </FlashCardWrapper>
@@ -73,7 +73,7 @@ function CollectionPage() {
     selectedWords.map((word) => (
       <FlashCardWrapper onPress={() => handleSelectSong(word)}>
         <FlashCardHeader>
-          <FlashCardTitle>{word?.track_name}</FlashCardTitle>
+          <FlashCardTitle>{word?.name}</FlashCardTitle>
         </FlashCardHeader>
         <FlashCardBody>
           <FlashCardBodyText></FlashCardBodyText>
@@ -92,8 +92,8 @@ function CollectionPage() {
         )}
         {flashCardsMusic ? (
           <>
-            <SongTitle>{flashCardsMusic?.track_name}</SongTitle>
-            <ArtistName>{flashCardsMusic?.artist_name}</ArtistName>
+            <SongTitle>{flashCardsMusic?.name}</SongTitle>
+            <ArtistName>{flashCardsMusic?.artist}</ArtistName>
           </>
         ) : (
           <>

@@ -1,11 +1,11 @@
-import { Text, SafeAreaView } from "react-native";
+import { ScrollView, Text, SafeAreaView } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import useReadFirebase from "../../Context/Hooks/useReadFirebase";
 
 import useLanguage from "../../Context/Hooks/useLanguage";
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
-import { List, Header, SelectLanguage, SectionTitle } from "./styled";
+import { Header, SelectLanguage, SectionTitle } from "./styled";
 
 import SongCard from "../../Components/SongCard";
 
@@ -48,17 +48,24 @@ const MainPage = (props) => {
           <Text>{selectedLanguage?.label}</Text>
         </SelectLanguage>
       </Header>
-      {list ? (
-        <List
-          data={list}
-          renderItem={({item}) => (
-            <SongCard key={item.id} song={item} navigation={props.navigation} />
-          )}
-          keyExtractor={({ id }) => id}
-        />
-      ) : (
-        <></>
-      )}
+      <ScrollView>
+          {list &&
+            <>
+              <SongCard
+                key={list[0].id}
+                song={list[0]}
+                file={require('../../assets/BS4CmkiEm7fcmo0r95bw.mp3')}
+                navigation={props.navigation}
+              />
+              <SongCard
+                key={list[1].id}
+                song={list[1]}
+                file={require('../../assets/TtsqdbDDW0xMnQ2zJlu7.mp3')}
+                navigation={props.navigation}
+              />
+            </>
+          }
+      </ScrollView>
     </SafeAreaView>
   );
 };
