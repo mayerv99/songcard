@@ -21,6 +21,6 @@ export const SectionTitle = styled.Text`
   font-size: 16px;
 `;
 
-export const List = styled.FlatList`
+export const List = styled.ScrollView`
   max-height: 78%;
 `;

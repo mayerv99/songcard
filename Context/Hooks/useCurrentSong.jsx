@@ -12,7 +12,9 @@ export default function useCurrentSong() {
     listenedSongs,
     setListenedsSongs,
     songFile,
-    setSongFile
+    setSongFile,
+    playing,
+    setPlaying
   } = useContext(CurrentSongContext);
 
   useEffect(() => {
@@ -44,6 +46,8 @@ export default function useCurrentSong() {
     setListenedsSongs,
     addNewListenedSong,
     songFile,
-    setSongFile
+    setSongFile,
+    playing,
+    setPlaying
   };
 }

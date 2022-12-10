@@ -4,7 +4,7 @@ export const Wrapper = styled.Pressable`
   width: 90%;
   margin: 10px auto;
   background-color: ${(props) => props.theme.background.primary};
-  padding: 20px 10px;
+  padding: 20px 15px;
   display: flex;
   flex-direction: row;
   border-radius: 10px;

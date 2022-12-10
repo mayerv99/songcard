@@ -12,7 +12,7 @@ import {
 } from "./styled";
 
 const SongCard = ({ song, file, navigation }) => {
-  const { setCurrentSong, addNewListenedSong, setSongFile } = useCurrentSong();
+  const { setCurrentSong, addNewListenedSong, setSongFile, setPlaying } = useCurrentSong();
 
   async function playSound() {
     console.log('---------------- Loading Sound');
@@ -22,6 +22,8 @@ const SongCard = ({ song, file, navigation }) => {
 
     console.log('---------------- Playing Sound');
     await sound.playAsync();
+
+    setPlaying(true);
   }
 
   const handlePress = useCallback(() => {

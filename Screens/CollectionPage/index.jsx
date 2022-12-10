@@ -54,7 +54,7 @@ function CollectionPage() {
   const generateSongsFlashCard = useMemo(
     () =>
       listenedSongs.map((song) => (
-        <FlashCardWrapper onPress={() => handleSelectSong(song)}>
+        <FlashCardWrapper key={song?.id} onPress={() => handleSelectSong(song)}>
           <FlashCardHeader>
             <FlashCardTitle>{song?.name}</FlashCardTitle>
           </FlashCardHeader>

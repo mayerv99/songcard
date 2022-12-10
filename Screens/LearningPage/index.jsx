@@ -1,5 +1,4 @@
 import { SafeAreaView, View, Text } from "react-native";
-import React, { useState } from "react";
 import { Foundation } from '@expo/vector-icons';
 
 import _ from "lodash";
@@ -21,33 +20,14 @@ import {
 } from "./styled";
 
 function LearningPage({ navigation }) {
-  const { currentSong, selectedWords, setSelectedWords, songFile } = useCurrentSong();
-
-  const [playing, setPlaying] = useState(false);
-  // const [lyrics, setLyrics] = useState();
-
-  //const getLyrics = useCallback(async () => {
-  //if (currentSong === undefined) {
-  //  return;
-  //}
-
-  //const endpoint = `/track.lyrics.get?track_id=${currentSong.track_id}&apikey=4306ade10d6239b3b17e0aadf07f0ff9`,
-  //  data = await api.get(endpoint).then((res) => res.data),
-  //  lyrics = data?.message?.body?.lyrics?.lyrics_body;
-
-  //if (lyrics?.length) {
-  //  const rawLyrics = lyrics.split("");
-  //  rawLyrics.splice(-75);
-  //  setLyrics(rawLyrics.join(""));
-  //  return;
-  //}
-
-  //setLyrics(null);
-  //}, [currentSong]);
-
-  //useEffect(() => {
-  //  getLyrics();
-  //}, [getLyrics]);
+  const {
+    currentSong,
+    selectedWords,
+    setSelectedWords,
+    songFile,
+    playing,
+    setPlaying
+  } = useCurrentSong();
 
   const shadowStyle = {
     shadowColor: "#000",
@@ -77,8 +57,8 @@ function LearningPage({ navigation }) {
   };
 
   const handlePressPlayPause = () => {
-    playing === false && songFile.pauseAsync();
-    playing && songFile.playAsync();
+    playing && songFile.pauseAsync();
+    playing === false && songFile.playAsync();
     setPlaying(prev => !prev);
   };
 
@@ -145,12 +125,14 @@ function LearningPage({ navigation }) {
         )}
       </LyricsWrapper>
 
-      <PlayPauseButton
-        onPress={handlePressPlayPause}
-        style={{display: "flex", justifyContent: "center", alignItems: "center"}}
-      >
-        <Foundation name={playing ? 'play' : 'pause'} size={28} color="white" />
-      </PlayPauseButton>
+      {songFile &&
+        <PlayPauseButton
+          onPress={handlePressPlayPause}
+          style={{display: "flex", justifyContent: "center", alignItems: "center"}}
+        >
+          <Foundation name={playing ? 'pause' : 'play'} size={28} color="white" />
+        </PlayPauseButton>
+      }
     </SafeAreaView>
   );
 }
