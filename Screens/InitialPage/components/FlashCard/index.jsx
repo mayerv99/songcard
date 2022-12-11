@@ -7,8 +7,10 @@ const FlashCard = () => {
   const [currentPhrase, setCurrentPhrase] = useState(0);
 
   const phrases = [
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "Escute suas músicas preferidas e se divirta enquanto aprende um novo idioma!",
+    "Já fez seus exercícios de SongCard hoje?",
+    "Qual música vc quer estudar? Escolha uma de algum país que ainda não visitou!",
+    "Faça alguns exercícios todo dia para melhorar o seu aprendizado",
   ];
 
   const handlePress = () => {

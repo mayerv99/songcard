@@ -13,4 +13,5 @@ export const FlashCardText = styled.Text`
   text-align: center;
   font-weight: 600;
   margin: auto 0;
+  font-size: 16px;
 `;
