@@ -108,7 +108,9 @@ function LearningPage({ navigation }) {
   }, [currentSong]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
+    <SafeAreaView
+      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 50 }}
+    >
       <Navbar>
         <SongTitle>
           {currentSong?.name.substring(0, 40)}

@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { Text } from "react-native";
 
 import {
   Wrapper,
@@ -22,14 +22,16 @@ export default function ProfilePage(props) {
   const { currentUser } = useCurrentUser();
 
   return (
-    <Wrapper style={{ backgroundColor: "white", minHeight: "100%" }}>
+    <Wrapper
+      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 50 }}
+    >
       <UserDataWrapper
         style={{
           borderBottomColor: "#f3f3f8",
           borderBottomWidth: 2,
         }}
       >
-        {currentUser ?
+        {currentUser ? (
           <>
             <NameAndEmailWrapper>
               <UserName>
@@ -43,9 +45,9 @@ export default function ProfilePage(props) {
               }}
             />
           </>
-          :
+        ) : (
           <Text>Não logado</Text>
-        }
+        )}
       </UserDataWrapper>
 
       {/* <Button>

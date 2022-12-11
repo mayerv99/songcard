@@ -42,7 +42,13 @@ const MainPage = (props) => {
   }, [currentUser]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: "white",
+        minHeight: "100%",
+        marginTop: 30,
+      }}
+    >
       <Header>
         <SectionTitle>Minhas músicas</SectionTitle>
         <SelectLanguage>
