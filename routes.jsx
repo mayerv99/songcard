@@ -1,9 +1,5 @@
 import React, { useRef } from "react";
-import {
-  View,
-  Animated,
-  Dimensions,
-} from "react-native";
+import { View, Dimensions } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -46,19 +42,8 @@ function NoAppBarRoutes() {
 }
 
 function AppBarRoutes() {
-  const { setCurrentSong, songFile, setSongFile, setPlaying } = useCurrentSong();
-
-  const tabOffsetValue = useRef(new Animated.Value(0)).current;
-
-  const getWidth = () => {
-    let width = Dimensions.get("window").width;
-
-    //Horizontal padding
-    width = width - 70;
-
-    //Total tabs
-    return width / 4;
-  };
+  const { setCurrentSong, songFile, setSongFile, setPlaying } =
+    useCurrentSong();
 
   const calculateAppBarHeight = () => {
     let height = Dimensions.get("window").height;
@@ -108,10 +93,6 @@ function AppBarRoutes() {
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: 0,
-                useNativeDriver: true,
-              }).start();
               songFile?.unloadAsync();
               setCurrentSong();
               setSongFile();
@@ -131,12 +112,7 @@ function AppBarRoutes() {
             ),
           }}
           listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 1,
-                useNativeDriver: true,
-              }).start();
-            },
+            tabPress: (e) => {},
           })}
         />
 
@@ -157,10 +133,6 @@ function AppBarRoutes() {
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 2,
-                useNativeDriver: true,
-              }).start();
               songFile?.unloadAsync();
               setCurrentSong();
               setSongFile();
@@ -181,10 +153,6 @@ function AppBarRoutes() {
           }}
           listeners={({ navigation, route }) => ({
             tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 3.1,
-                useNativeDriver: true,
-              }).start();
               songFile?.unloadAsync();
               setCurrentSong();
               setSongFile();
@@ -193,18 +161,6 @@ function AppBarRoutes() {
           })}
         />
       </Tab.Navigator>
-      <Animated.View
-        style={{
-          width: getWidth(),
-          height: 2,
-          backgroundColor: "#7512f3",
-          position: "absolute",
-          bottom: 29,
-          left: 32,
-          transform: [{ translateX: tabOffsetValue }],
-          borderRadius: 2,
-        }}
-      ></Animated.View>
     </>
   );
 }

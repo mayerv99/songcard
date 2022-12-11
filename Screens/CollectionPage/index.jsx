@@ -3,6 +3,8 @@ import { SafeAreaView, View, Text } from "react-native";
 
 import * as Speech from "expo-speech";
 
+import axios from "axios";
+
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 import useReadFirebase from "../../Context/Hooks/useReadFirebase";
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
@@ -66,7 +68,6 @@ function CollectionPage() {
   };
 
   const speak = (word) => {
-    console.log(word);
     Speech.speak(word);
   };
 
@@ -92,6 +93,25 @@ function CollectionPage() {
     [listenedSongs, musicsIdList]
   );
 
+  const detectLanguage = async (word) => {
+    const language = await axios
+      .post("https://libretranslate.de/detect", { q: word })
+      .then((res) => res.data[0].language);
+    return language;
+  };
+
+  const translateText = async (word) => {
+    const translatedWord = await axios
+      .post("https://libretranslate.de/translate", {
+        q: word,
+        source: await detectLanguage(word),
+        target: "pt",
+      })
+      .then((res) => res.data.translatedText)
+      .catch((err) => console.error(err));
+    return typeof translatedWord === "string" && translatedWord;
+  };
+
   const generateWordsFlashCard = useMemo(
     () =>
       flashCardsMusic?.selectedWords?.map((word) => (
@@ -100,7 +120,7 @@ function CollectionPage() {
             <FlashCardTitle>{word?.word}</FlashCardTitle>
           </FlashCardHeader>
           <FlashCardBody>
-            <FlashCardBodyText></FlashCardBodyText>
+            {/* <FlashCardBodyText>{translateText(word?.word)}</FlashCardBodyText> */}
           </FlashCardBody>
         </FlashCardWrapper>
       )),
