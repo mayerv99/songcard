@@ -4,7 +4,9 @@ import { Foundation } from "@expo/vector-icons";
 import _ from "lodash";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
-import useWriteFirebase from "../../Context/Hooks/useWriteFirebase";
+import useWriteFirebase, {
+  useWriteCollection,
+} from "../../Context/Hooks/useWriteFirebase";
 import useReadFirebase from "../../Context/Hooks/useReadFirebase";
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
@@ -49,7 +51,14 @@ function LearningPage({ navigation }) {
   };
 
   const addWord = (selectedWord) => {
-    return setSelectedWords((prevState) => [...prevState, selectedWord]);
+    setSelectedWords((prevState) => [...prevState, selectedWord]);
+    addWordToFirebase(selectedWord);
+  };
+
+  const addWordToFirebase = async (selectedWord) => {
+    useWriteFirebase(currentUser?.id, currentSong?.id, {
+      selectedWords: [...selectedWords, selectedWord],
+    });
   };
 
   const removeWord = (selectedWord) => {
@@ -72,19 +81,18 @@ function LearningPage({ navigation }) {
   };
 
   const createUserInFirebase = () => {
-    useWriteFirebase(currentUser);
+    useWriteFirebase(currentUser?.id, currentSong?.id, { selectedWords });
   };
 
   const getCurrentMusic = async () => {
-    const musicData = await useReadFirebase(currentUser.id).then(
-      (res) => res.data
-    );
-    console.log("------ Dados da música Firebase", musicData);
+    const musicData = await useReadFirebase(currentUser?.id, currentSong?.id);
+    console.error("musicData: ", musicData);
   };
 
   useEffect(() => {
     if (currentUser) {
       getCurrentMusic();
+      createUserInFirebase();
     }
   }, [currentSong]);
 

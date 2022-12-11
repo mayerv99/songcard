@@ -32,14 +32,14 @@ function CollectionPage() {
   const infoCardData = () => {
     return !flashCardsMusic
       ? [
-          { label: "Músicas", value: listenedSongs?.length ?? '-' },
-          { label: "Flashcards", value: selectedWords?.length ?? '-' },
-          { label: "Tot. palavras", value: selectedWords?.length ?? '-' },
+          { label: "Músicas", value: listenedSongs?.length ?? "-" },
+          { label: "Flashcards", value: selectedWords?.length ?? "-" },
+          { label: "Tot. palavras", value: selectedWords?.length ?? "-" },
         ]
       : [
-          { label: "Palavras", value: selectedWords?.length ?? '-' },
-          { label: "Expressões", value: selectedWords?.length ?? '-' },
-          { label: "Tot. palavras", value: selectedWords?.length ?? '-' },
+          { label: "Palavras", value: selectedWords?.length ?? "-" },
+          { label: "Expressões", value: selectedWords?.length ?? "-" },
+          { label: "Tot. palavras", value: selectedWords?.length ?? "-" },
         ];
   };
 
@@ -122,15 +122,15 @@ function CollectionPage() {
           ))}
         </InfoCard>
       </TopBar>
-      {currentUser ?
+      {currentUser ? (
         <CardsWrapper>
           {!flashCardsMusic ? generateSongsFlashCard : generateWordsFlashCard}
         </CardsWrapper>
-        :
+      ) : (
         <LoginMessageWrapper>
           <Text>Para acessar esta área você precisa estar logado.</Text>
         </LoginMessageWrapper>
-      }
+      )}
     </SafeAreaView>
   );
 }

@@ -1,9 +1,15 @@
-import { collection as getCollection, addDoc } from "firebase/firestore";
+import {
+  collection as getCollection,
+  addDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 import db from "../../services/firebase";
 
-export default async function useWriteFirebase(collection, data) {
+export default async function useWriteFirebase(collection, song, data) {
+  ref = doc(db, collection, song);
   try {
-    await addDoc(getCollection(db, collection), data);
+    await setDoc(ref, data);
   } catch (error) {
     console.error("Error adding document: ", error.message);
   }
