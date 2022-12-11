@@ -58,7 +58,7 @@ function CollectionPage() {
   };
 
   const handleSelectSong = async (song) => {
-    const words = await useReadFirebase(currentUser.id, song?.id);
+    const words = await useReadFirebase(currentUser?.id, song?.id);
     setFlashCardsMusic(words[0]);
   };
 
