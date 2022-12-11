@@ -15,6 +15,7 @@ const LanguagePage = (props) => {
   const { setSelectedLanguage } = useLanguage();
 
   const handleSelectLanguage = (selected) => {
+    console.log("language: ", selected);
     setSelectedLanguage(selected);
     props.navigation.navigate("appBarRoutes");
   };

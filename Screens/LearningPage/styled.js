@@ -35,9 +35,9 @@ export const PlayPauseButton = styled.TouchableOpacity`
   right: 30px;
   width: 50px;
   height: 50px;
-  background-color: #7615F3;
-  border-radius: 50%;
-`
+  background-color: #7615f3;
+  border-radius: 50px;
+`;
 
 export const Navbar = styled(LinearGradient).attrs({
   colors: ["#7615F3", "rgba(117, 22, 242, 0.63)"],

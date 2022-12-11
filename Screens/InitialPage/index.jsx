@@ -45,7 +45,7 @@ const InitialPage = (props) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     const userInfo = await response.json();
-    setCurrentUser(userInfo);
+    setCurrentUser(userInfo), console.log("user", userInfo);
   };
 
   const handleGoogleSignIn = () => {

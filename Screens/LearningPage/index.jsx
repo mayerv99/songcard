@@ -1,9 +1,12 @@
 import { SafeAreaView, View, Text } from "react-native";
-import { Foundation } from '@expo/vector-icons';
+import { Foundation } from "@expo/vector-icons";
 
 import _ from "lodash";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
+import useWriteFirebase from "../../Context/Hooks/useWriteFirebase";
+import useReadFirebase from "../../Context/Hooks/useReadFirebase";
+import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
 import {
   LyricsWrapper,
@@ -16,8 +19,9 @@ import {
   SongTitle,
   ArtistName,
   WordText,
-  PlayPauseButton
+  PlayPauseButton,
 } from "./styled";
+import { useEffect } from "react";
 
 function LearningPage({ navigation }) {
   const {
@@ -26,13 +30,15 @@ function LearningPage({ navigation }) {
     setSelectedWords,
     songFile,
     playing,
-    setPlaying
+    setPlaying,
   } = useCurrentSong();
+
+  const { currentUser } = useCurrentUser();
 
   const shadowStyle = {
     shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowOffset: {height: 5},
+    shadowOffset: { height: 5 },
   };
 
   const checkIfWordExists = (selectedWord) => {
@@ -59,8 +65,25 @@ function LearningPage({ navigation }) {
   const handlePressPlayPause = () => {
     playing && songFile.pauseAsync();
     playing === false && songFile.playAsync();
-    setPlaying(prev => !prev);
+    setPlaying((prev) => !prev);
   };
+
+  const createMusicInFirebase = async () => {
+    const newMusic = await useWriteFirebase(currentUser);
+  };
+
+  const getCurrentMusic = async () => {
+    console.log("carlos");
+    const musicData = await useReadFirebase(currentUser.id).then((res) =>
+      console.log(res.data)
+    );
+    console.log(musicData);
+  };
+
+  useEffect(() => {
+    console.log("rodou");
+    getCurrentMusic();
+  }, [currentSong]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white", minHeight: "100%" }}>
@@ -125,14 +148,22 @@ function LearningPage({ navigation }) {
         )}
       </LyricsWrapper>
 
-      {songFile &&
+      {songFile && (
         <PlayPauseButton
           onPress={handlePressPlayPause}
-          style={{display: "flex", justifyContent: "center", alignItems: "center"}}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Foundation name={playing ? 'pause' : 'play'} size={28} color="white" />
+          <Foundation
+            name={playing ? "pause" : "play"}
+            size={28}
+            color="white"
+          />
         </PlayPauseButton>
-      }
+      )}
     </SafeAreaView>
   );
 }

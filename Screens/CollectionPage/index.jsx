@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { SafeAreaView } from "react-native";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
+import useReadFirebase from "../../Context/Hooks/useReadFirebase";
+import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
 import {
   TopBar,
@@ -21,6 +23,8 @@ import {
 
 function CollectionPage() {
   const { selectedWords, listenedSongs } = useCurrentSong();
+
+  const { currentUser } = useCurrentUser();
 
   const [flashCardsMusic, setFlashCardsMusic] = useState(null);
 
@@ -50,6 +54,14 @@ function CollectionPage() {
   const handleSelectSong = (song) => {
     setFlashCardsMusic(song);
   };
+
+  const getUserCollections = async () => {
+    const userMusics = await useReadFirebase(currentUser.id);
+  };
+
+  useEffect(() => {
+    getUserCollections();
+  }, []);
 
   const generateSongsFlashCard = useMemo(
     () =>
@@ -101,8 +113,8 @@ function CollectionPage() {
           </>
         )}
         <InfoCard style={shadowStyle}>
-          {infoCardData().map((data) => (
-            <InfoGroup>
+          {infoCardData().map((data, index) => (
+            <InfoGroup key={index}>
               <TextCount>{data.value}</TextCount>
               <TextDescription>{data.label}</TextDescription>
             </InfoGroup>
