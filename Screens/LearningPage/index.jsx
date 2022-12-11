@@ -80,13 +80,22 @@ function LearningPage({ navigation }) {
     setPlaying((prev) => !prev);
   };
 
-  const createUserInFirebase = () => {
-    useWriteFirebase(currentUser?.id, currentSong?.id, { selectedWords });
+  const createUserInFirebase = async () => {
+    const carlos = await useReadFirebase(currentUser?.id, currentSong?.id);
+    if (carlos.length === 0) {
+      useWriteFirebase(currentUser?.id, currentSong?.id, {
+        selectedWords,
+      });
+    }
   };
 
   const getCurrentMusic = async () => {
-    const musicData = await useReadFirebase(currentUser?.id, currentSong?.id);
-    console.error("musicData: ", musicData);
+    const musicData = await useReadFirebase(
+      currentUser?.id,
+      currentSong?.id
+    ).then((res) => res?.[0]);
+
+    return setSelectedWords(musicData.selectedWords);
   };
 
   useEffect(() => {
