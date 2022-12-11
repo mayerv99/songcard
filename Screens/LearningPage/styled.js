@@ -6,7 +6,7 @@ export const LyricsWrapper = styled.ScrollView.attrs({
   contentContainerStyle: { paddingVertical: 25, paddingHorizontal: 20 },
 })`
   width: 90%;
-  margin: 60px auto 30px;
+  margin: 50px auto 40px;
   background-color: ${(props) => props.theme.background.primary};
   border-radius: 10px;
   max-height: 65%;
@@ -31,7 +31,7 @@ export const WordText = styled.Text`
 
 export const PlayPauseButton = styled.TouchableOpacity`
   position: absolute;
-  bottom: 18%;
+  bottom: 19%;
   right: 30px;
   width: 50px;
   height: 50px;
