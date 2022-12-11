@@ -11,6 +11,10 @@ export default function useCurrentSong() {
     setSelectedWords,
     listenedSongs,
     setListenedsSongs,
+    songFile,
+    setSongFile,
+    playing,
+    setPlaying,
   } = useContext(CurrentSongContext);
 
   useEffect(() => {
@@ -30,7 +34,7 @@ export default function useCurrentSong() {
   };
 
   const musicAlreadyOnList = (newSong) => {
-    return listenedSongs.some((song) => song.track_id === newSong.track_id);
+    return listenedSongs.some((song) => song.id === newSong.id);
   };
 
   return {
@@ -41,5 +45,9 @@ export default function useCurrentSong() {
     listenedSongs,
     setListenedsSongs,
     addNewListenedSong,
+    songFile,
+    setSongFile,
+    playing,
+    setPlaying,
   };
 }

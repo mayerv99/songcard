@@ -6,7 +6,7 @@ export const LyricsWrapper = styled.ScrollView.attrs({
   contentContainerStyle: { paddingVertical: 25, paddingHorizontal: 20 },
 })`
   width: 90%;
-  margin: 50px auto;
+  margin: 60px auto 30px;
   background-color: ${(props) => props.theme.background.primary};
   border-radius: 10px;
   max-height: 65%;
@@ -27,6 +27,16 @@ export const WordText = styled.Text`
   padding: 2px;
 
   ${(props) => props.selected && `color: white;`};
+`;
+
+export const PlayPauseButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 18%;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #7615f3;
+  border-radius: 50px;
 `;
 
 export const Navbar = styled(LinearGradient).attrs({

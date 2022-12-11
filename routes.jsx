@@ -1,8 +1,6 @@
 import React, { useRef } from "react";
 import {
   View,
-  TouchableOpacity,
-  Text,
   Animated,
   Dimensions,
 } from "react-native";
@@ -13,6 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //RoutesWithoutNavbar
 import InitialPage from "./Screens/InitialPage";
 import LanguagePage from "./Screens/LanguagePage";
+import useCurrentSong from "./Context/Hooks/useCurrentSong";
 
 //RoutesWithNavbar
 import MainPage from "./Screens/MainPage";
@@ -25,7 +24,6 @@ import {
   MaterialCommunityIcons,
   SimpleLineIcons,
   FontAwesome5,
-  Feather,
 } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
@@ -48,6 +46,8 @@ function NoAppBarRoutes() {
 }
 
 function AppBarRoutes() {
+  const { setCurrentSong, songFile, setSongFile, setPlaying } = useCurrentSong();
+
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   const getWidth = () => {
@@ -112,6 +112,10 @@ function AppBarRoutes() {
                 toValue: 0,
                 useNativeDriver: true,
               }).start();
+              songFile?.unloadAsync();
+              setCurrentSong();
+              setSongFile();
+              setPlaying(false);
             },
           })}
         />
@@ -157,6 +161,10 @@ function AppBarRoutes() {
                 toValue: getWidth() * 2,
                 useNativeDriver: true,
               }).start();
+              songFile?.unloadAsync();
+              setCurrentSong();
+              setSongFile();
+              setPlaying(false);
             },
           })}
         />
@@ -177,6 +185,10 @@ function AppBarRoutes() {
                 toValue: getWidth() * 3.1,
                 useNativeDriver: true,
               }).start();
+              songFile?.unloadAsync();
+              setCurrentSong();
+              setSongFile();
+              setPlaying(false);
             },
           })}
         />

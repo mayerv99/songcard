@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { SafeAreaView } from "react-native";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
+import useReadFirebase from "../../Context/Hooks/useReadFirebase";
+import useCurrentUser from "../../Context/Hooks/useCurrentUser";
 
 import {
   TopBar,
@@ -21,6 +23,8 @@ import {
 
 function CollectionPage() {
   const { selectedWords, listenedSongs } = useCurrentSong();
+
+  const { currentUser } = useCurrentUser();
 
   const [flashCardsMusic, setFlashCardsMusic] = useState(null);
 
@@ -51,17 +55,25 @@ function CollectionPage() {
     setFlashCardsMusic(song);
   };
 
+  const getUserCollections = async () => {
+    const userMusics = await useReadFirebase(currentUser.id);
+  };
+
+  useEffect(() => {
+    getUserCollections();
+  }, []);
+
   const generateSongsFlashCard = useMemo(
     () =>
       listenedSongs.map((song) => (
-        <FlashCardWrapper onPress={() => handleSelectSong(song)}>
+        <FlashCardWrapper key={song?.id} onPress={() => handleSelectSong(song)}>
           <FlashCardHeader>
-            <FlashCardTitle>{song?.track_name}</FlashCardTitle>
+            <FlashCardTitle>{song?.name}</FlashCardTitle>
           </FlashCardHeader>
           <FlashCardBody>
             <FlashCardBodyText>
-              by {song?.artist_name.substring(0, 15)}
-              {song?.artist_name?.length > 15 && "..."}
+              by {song?.artist.substring(0, 15)}
+              {song?.artist?.length > 15 && "..."}
             </FlashCardBodyText>
           </FlashCardBody>
         </FlashCardWrapper>
@@ -73,7 +85,7 @@ function CollectionPage() {
     selectedWords.map((word) => (
       <FlashCardWrapper onPress={() => handleSelectSong(word)}>
         <FlashCardHeader>
-          <FlashCardTitle>{word?.track_name}</FlashCardTitle>
+          <FlashCardTitle>{word?.name}</FlashCardTitle>
         </FlashCardHeader>
         <FlashCardBody>
           <FlashCardBodyText></FlashCardBodyText>
@@ -92,8 +104,8 @@ function CollectionPage() {
         )}
         {flashCardsMusic ? (
           <>
-            <SongTitle>{flashCardsMusic?.track_name}</SongTitle>
-            <ArtistName>{flashCardsMusic?.artist_name}</ArtistName>
+            <SongTitle>{flashCardsMusic?.name}</SongTitle>
+            <ArtistName>{flashCardsMusic?.artist}</ArtistName>
           </>
         ) : (
           <>
@@ -101,8 +113,8 @@ function CollectionPage() {
           </>
         )}
         <InfoCard style={shadowStyle}>
-          {infoCardData().map((data) => (
-            <InfoGroup>
+          {infoCardData().map((data, index) => (
+            <InfoGroup key={index}>
               <TextCount>{data.value}</TextCount>
               <TextDescription>{data.label}</TextDescription>
             </InfoGroup>

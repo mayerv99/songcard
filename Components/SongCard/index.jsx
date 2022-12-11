@@ -1,31 +1,45 @@
 import React, { useCallback } from "react";
+import { Audio } from 'expo-av';
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 
 import {
   Wrapper,
   RoundedPic,
-  SongNameAndArtist,
-  SongName,
   ArtistName,
+  SongName,
+  SongNameAndArtist,
 } from "./styled";
 
-const MusicCard = ({ music, navigation }) => {
-  const { setCurrentSong, addNewListenedSong } = useCurrentSong();
+const SongCard = ({ song, file, navigation }) => {
+  const { setCurrentSong, addNewListenedSong, setSongFile, setPlaying } = useCurrentSong();
+
+  async function playSound() {
+    console.log('---------------- Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(file);
+
+    setSongFile(sound);
+
+    console.log('---------------- Playing Sound');
+    await sound.playAsync();
+
+    setPlaying(true);
+  }
 
   const handlePress = useCallback(() => {
+    playSound()
     setCurrentSong(song);
     navigation.navigate("learningPage");
-    addNewListenedSong(music);
-  }, [music]);
+    addNewListenedSong(song);
+  }, [song]);
 
   return (
     <Wrapper onPress={handlePress}>
-      <RoundedPic></RoundedPic>
-      <MusicAndArtist>
-        <MusicName>{music.track_name}</MusicName>
-        <ArtistName>{music.artist_name}</ArtistName>
-      </MusicAndArtist>
+      <RoundedPic source={{uri: song.img}}></RoundedPic>
+      <SongNameAndArtist>
+        <SongName>{song.name}</SongName>
+        <ArtistName>{song.artist}</ArtistName>
+      </SongNameAndArtist>
     </Wrapper>
   );
 };
