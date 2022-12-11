@@ -1,3 +1,5 @@
+import { Text } from 'react-native';
+
 import {
   Wrapper,
   UserDataWrapper,
@@ -5,8 +7,6 @@ import {
   UserName,
   UserEmail,
   ProfilePic,
-  Button,
-  ButtonText,
   Languages,
   Title,
   ImagesWrapper,
@@ -29,17 +29,23 @@ export default function ProfilePage(props) {
           borderBottomWidth: 2,
         }}
       >
-        <NameAndEmailWrapper>
-          <UserName>
-            {currentUser?.given_name} {currentUser?.family_name}
-          </UserName>
-          <UserEmail>{currentUser?.email}</UserEmail>
-        </NameAndEmailWrapper>
-        <ProfilePic
-          source={{
-            uri: currentUser?.picture,
-          }}
-        />
+        {currentUser ?
+          <>
+            <NameAndEmailWrapper>
+              <UserName>
+                {currentUser?.given_name} {currentUser?.family_name}
+              </UserName>
+              <UserEmail>{currentUser?.email}</UserEmail>
+            </NameAndEmailWrapper>
+            <ProfilePic
+              source={{
+                uri: currentUser?.picture,
+              }}
+            />
+          </>
+          :
+          <Text>Não logado</Text>
+        }
       </UserDataWrapper>
 
       {/* <Button>

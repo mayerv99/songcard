@@ -38,7 +38,10 @@ function LearningPage({ navigation }) {
   const shadowStyle = {
     shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowOffset: { height: 5 },
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
   };
 
   const checkIfWordExists = (selectedWord) => {
@@ -68,21 +71,20 @@ function LearningPage({ navigation }) {
     setPlaying((prev) => !prev);
   };
 
-  const createMusicInFirebase = async () => {
-    const newMusic = await useWriteFirebase(currentUser);
+  const createUserInFirebase = () => {
+    useWriteFirebase(currentUser);
   };
 
   const getCurrentMusic = async () => {
-    console.log("carlos");
-    const musicData = await useReadFirebase(currentUser.id).then((res) =>
-      console.log(res.data)
-    );
-    console.log(musicData);
+      const musicData = await useReadFirebase(currentUser.id).then((res) => res.data);
+      console.log('------ Dados da música Firebase', musicData);
   };
 
   useEffect(() => {
-    console.log("rodou");
-    getCurrentMusic();
+    if (currentUser)
+    {
+      getCurrentMusic();
+    }
   }, [currentSong]);
 
   return (
@@ -98,12 +100,12 @@ function LearningPage({ navigation }) {
         </ArtistName>
         <InfoCard style={shadowStyle}>
           <InfoGroup>
-            <TextCount>{selectedWords?.length}</TextCount>
+            <TextCount>{selectedWords?.length ?? 0}</TextCount>
             <TextDescription>Palavras selecionadas</TextDescription>
           </InfoGroup>
 
           <InfoGroup>
-            <TextCount>{currentSong?.lyrics?.length}</TextCount>
+            <TextCount>{currentSong?.lyrics?.length ?? 0}</TextCount>
             <TextDescription>Tot. palavras</TextDescription>
           </InfoGroup>
         </InfoCard>
@@ -119,7 +121,7 @@ function LearningPage({ navigation }) {
           <Text>← Volte e selecione uma música</Text>
         )}
         {currentSong?.lyrics?.length &&
-          currentSong?.lyrics?.split(/(?=[A-Z])/).map((line, lineIndex) => (
+          currentSong?.lyrics?.split("\n").map((line, lineIndex) => (
             <Text key={lineIndex}>
               {line.split(" ").map((word, wordIndex) => (
                 <View key={wordIndex}>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View, Text } from "react-native";
 
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 import useReadFirebase from "../../Context/Hooks/useReadFirebase";
@@ -19,6 +19,7 @@ import {
   FlashCardBodyText,
   SongTitle,
   ArtistName,
+  LoginMessageWrapper,
 } from "./styled";
 
 function CollectionPage() {
@@ -31,14 +32,14 @@ function CollectionPage() {
   const infoCardData = () => {
     return !flashCardsMusic
       ? [
-          { label: "Músicas", value: listenedSongs?.length },
-          { label: "Flashcards", value: selectedWords?.length },
-          { label: "Tot. palavras", value: selectedWords?.length },
+          { label: "Músicas", value: listenedSongs?.length ?? '-' },
+          { label: "Flashcards", value: selectedWords?.length ?? '-' },
+          { label: "Tot. palavras", value: selectedWords?.length ?? '-' },
         ]
       : [
-          { label: "Palavras", value: selectedWords?.length },
-          { label: "Expressões", value: selectedWords?.length },
-          { label: "Tot. palavras", value: selectedWords?.length },
+          { label: "Palavras", value: selectedWords?.length ?? '-' },
+          { label: "Expressões", value: selectedWords?.length ?? '-' },
+          { label: "Tot. palavras", value: selectedWords?.length ?? '-' },
         ];
   };
 
@@ -56,7 +57,7 @@ function CollectionPage() {
   };
 
   const getUserCollections = async () => {
-    const userMusics = await useReadFirebase(currentUser.id);
+    const userMusics = await useReadFirebase(currentUser?.id);
   };
 
   useEffect(() => {
@@ -121,9 +122,15 @@ function CollectionPage() {
           ))}
         </InfoCard>
       </TopBar>
-      <CardsWrapper>
-        {!flashCardsMusic ? generateSongsFlashCard : generateWordsFlashCard}
-      </CardsWrapper>
+      {currentUser ?
+        <CardsWrapper>
+          {!flashCardsMusic ? generateSongsFlashCard : generateWordsFlashCard}
+        </CardsWrapper>
+        :
+        <LoginMessageWrapper>
+          <Text>Para acessar esta área você precisa estar logado.</Text>
+        </LoginMessageWrapper>
+      }
     </SafeAreaView>
   );
 }
