@@ -89,3 +89,7 @@ export const ArtistName = styled.Text`
   color: white;
   font-size: 14px;
 `;
+
+export const LoginMessageWrapper = styled.View`
+  margin: 70px 0 10px 20px;
+`
