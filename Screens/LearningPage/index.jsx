@@ -58,6 +58,7 @@ function LearningPage({ navigation }) {
   const addWordToFirebase = async (selectedWord) => {
     useWriteFirebase(currentUser?.id, currentSong?.id, {
       selectedWords: [...selectedWords, selectedWord],
+      songData: { name: currentSong?.name, artist: currentSong?.artist },
     });
   };
 
@@ -85,6 +86,7 @@ function LearningPage({ navigation }) {
     if (carlos.length === 0) {
       useWriteFirebase(currentUser?.id, currentSong?.id, {
         selectedWords,
+        songData: { name: currentSong?.name, artist: currentSong?.artist },
       });
     }
   };

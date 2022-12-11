@@ -28,6 +28,7 @@ function CollectionPage() {
   const { currentUser } = useCurrentUser();
 
   const [flashCardsMusic, setFlashCardsMusic] = useState(null);
+  const [musicsIdList, setMusicsIdList] = useState([]);
 
   const infoCardData = () => {
     return !flashCardsMusic
@@ -52,12 +53,14 @@ function CollectionPage() {
     },
   };
 
-  const handleSelectSong = (song) => {
-    setFlashCardsMusic(song);
+  const handleSelectSong = async (song) => {
+    const words = await useReadFirebase(currentUser.id, song?.id);
+    setFlashCardsMusic(words[0]);
   };
 
   const getUserCollections = async () => {
     const userMusics = await useReadFirebase(currentUser?.id);
+    setMusicsIdList(userMusics);
   };
 
   useEffect(() => {
@@ -66,33 +69,37 @@ function CollectionPage() {
 
   const generateSongsFlashCard = useMemo(
     () =>
-      listenedSongs.map((song) => (
+      musicsIdList.map((song) => (
         <FlashCardWrapper key={song?.id} onPress={() => handleSelectSong(song)}>
           <FlashCardHeader>
-            <FlashCardTitle>{song?.name}</FlashCardTitle>
+            <FlashCardTitle>{song?.songData?.name}</FlashCardTitle>
           </FlashCardHeader>
           <FlashCardBody>
             <FlashCardBodyText>
-              by {song?.artist.substring(0, 15)}
-              {song?.artist?.length > 15 && "..."}
+              by {song?.songData?.artist?.substring(0, 15)}
+              {song?.songData?.artist?.length > 15 && "..."}
             </FlashCardBodyText>
           </FlashCardBody>
         </FlashCardWrapper>
       )),
-    [listenedSongs]
+    [listenedSongs, musicsIdList]
   );
 
-  const generateWordsFlashCard = useMemo(() =>
-    selectedWords.map((word) => (
-      <FlashCardWrapper onPress={() => handleSelectSong(word)}>
-        <FlashCardHeader>
-          <FlashCardTitle>{word?.name}</FlashCardTitle>
-        </FlashCardHeader>
-        <FlashCardBody>
-          <FlashCardBodyText></FlashCardBodyText>
-        </FlashCardBody>
-      </FlashCardWrapper>
-    ))
+  const generateWordsFlashCard = useMemo(
+    () =>
+      flashCardsMusic?.selectedWords?.map((word) => (
+        <FlashCardWrapper onPress={}>
+          <FlashCardHeader>
+            <FlashCardTitle>{word?.word}</FlashCardTitle>
+          </FlashCardHeader>
+          <FlashCardBody>
+            <FlashCardBodyText>
+
+            </FlashCardBodyText>
+          </FlashCardBody>
+        </FlashCardWrapper>
+      )),
+    [flashCardsMusic]
   );
 
   return (
@@ -105,8 +112,8 @@ function CollectionPage() {
         )}
         {flashCardsMusic ? (
           <>
-            <SongTitle>{flashCardsMusic?.name}</SongTitle>
-            <ArtistName>{flashCardsMusic?.artist}</ArtistName>
+            <SongTitle>{flashCardsMusic?.songData?.name}</SongTitle>
+            <ArtistName>{flashCardsMusic?.songData?.artist}</ArtistName>
           </>
         ) : (
           <>
