@@ -21,6 +21,7 @@
     "expo-linear-gradient": "~11.4.0",
     "expo-linking": "^3.2.2",
     "expo-random": "~12.3.0",
+    "expo-speech": "~10.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
     "expo-updates": "~0.14.6",

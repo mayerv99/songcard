@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { SafeAreaView, View, Text } from "react-native";
 
+import * as Speech from "expo-speech";
+
 import useCurrentSong from "../../Context/Hooks/useCurrentSong";
 import useReadFirebase from "../../Context/Hooks/useReadFirebase";
 import useCurrentUser from "../../Context/Hooks/useCurrentUser";
@@ -63,6 +65,11 @@ function CollectionPage() {
     setMusicsIdList(userMusics);
   };
 
+  const speak = (word) => {
+    console.log(word);
+    Speech.speak(word);
+  };
+
   useEffect(() => {
     getUserCollections();
   }, []);
@@ -88,14 +95,12 @@ function CollectionPage() {
   const generateWordsFlashCard = useMemo(
     () =>
       flashCardsMusic?.selectedWords?.map((word) => (
-        <FlashCardWrapper onPress={}>
+        <FlashCardWrapper onPress={() => speak(word.word)}>
           <FlashCardHeader>
             <FlashCardTitle>{word?.word}</FlashCardTitle>
           </FlashCardHeader>
           <FlashCardBody>
-            <FlashCardBodyText>
-
-            </FlashCardBodyText>
+            <FlashCardBodyText></FlashCardBodyText>
           </FlashCardBody>
         </FlashCardWrapper>
       )),
