@@ -76,13 +76,14 @@ function LearningPage({ navigation }) {
   };
 
   const getCurrentMusic = async () => {
-      const musicData = await useReadFirebase(currentUser.id).then((res) => res.data);
-      console.log('------ Dados da música Firebase', musicData);
+    const musicData = await useReadFirebase(currentUser.id).then(
+      (res) => res.data
+    );
+    console.log("------ Dados da música Firebase", musicData);
   };
 
   useEffect(() => {
-    if (currentUser)
-    {
+    if (currentUser) {
       getCurrentMusic();
     }
   }, [currentSong]);
@@ -95,8 +96,8 @@ function LearningPage({ navigation }) {
           {currentSong?.name.length > 40 && "..."}
         </SongTitle>
         <ArtistName>
-          {currentSong?.name.substring(0, 40)}
-          {currentSong?.name.length > 40 && "..."}
+          {currentSong?.artist.substring(0, 40)}
+          {currentSong?.artist.length > 40 && "..."}
         </ArtistName>
         <InfoCard style={shadowStyle}>
           <InfoGroup>
