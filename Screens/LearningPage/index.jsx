@@ -76,8 +76,8 @@ function LearningPage({ navigation }) {
   };
 
   const handlePressPlayPause = () => {
-    playing && songFile.pauseAsync();
-    playing === false && songFile.playAsync();
+    playing && songFile?.pauseAsync();
+    playing === false && songFile?.playAsync();
     setPlaying((prev) => !prev);
   };
 
