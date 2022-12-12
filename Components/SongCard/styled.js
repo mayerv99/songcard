@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.Pressable`
   width: 90%;
-  margin: 10px auto;
+  margin: 8px auto;
   background-color: ${(props) => props.theme.background.primary};
   padding: 20px 15px;
   display: flex;
