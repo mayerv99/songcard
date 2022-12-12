@@ -112,7 +112,12 @@ function AppBarRoutes() {
             ),
           }}
           listeners={({ navigation, route }) => ({
-            tabPress: (e) => {},
+            beforeRemove: () => {
+              songFile?.unloadAsync();
+              setCurrentSong();
+              setSongFile();
+              setPlaying(false);
+            }
           })}
         />
 
