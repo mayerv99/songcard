@@ -22,5 +22,5 @@ export const SectionTitle = styled.Text`
 `;
 
 export const List = styled.ScrollView`
-  max-height: 78%;
+  max-height: 75%;
 `;

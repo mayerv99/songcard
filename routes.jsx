@@ -48,7 +48,7 @@ function AppBarRoutes() {
   const calculateAppBarHeight = () => {
     let height = Dimensions.get("window").height;
 
-    return height / 10;
+    return height / 11;
   };
 
   return (

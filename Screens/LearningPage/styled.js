@@ -9,7 +9,7 @@ export const LyricsWrapper = styled.ScrollView.attrs({
   margin: 50px auto 40px;
   background-color: ${(props) => props.theme.background.primary};
   border-radius: 10px;
-  max-height: 65%;
+  max-height: 64%;
 `;
 
 export const Word = styled.TouchableOpacity`
