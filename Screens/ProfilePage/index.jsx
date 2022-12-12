@@ -23,7 +23,7 @@ export default function ProfilePage(props) {
 
   return (
     <Wrapper
-      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 50 }}
+      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 35 }}
     >
       <UserDataWrapper
         style={{

@@ -109,7 +109,7 @@ function LearningPage({ navigation }) {
 
   return (
     <SafeAreaView
-      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 50 }}
+      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 35 }}
     >
       <Navbar>
         <SongTitle>

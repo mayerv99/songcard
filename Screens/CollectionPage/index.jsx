@@ -129,7 +129,7 @@ function CollectionPage() {
 
   return (
     <SafeAreaView
-      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 50 }}
+      style={{ backgroundColor: "white", minHeight: "100%", marginTop: 35 }}
     >
       <TopBar>
         {flashCardsMusic && (
